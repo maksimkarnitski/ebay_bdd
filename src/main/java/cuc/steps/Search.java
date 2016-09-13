@@ -7,10 +7,10 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.Assert;
 
-public class Search extends StartDriver{
+public class Search extends StartDriver {
 
     @When("^I search for \"([^\"]*)\"")
-        public void iSetSearchQuery(String searchQuery){
+    public void iSetSearchQuery(String searchQuery) {
         new HeaderMenu(driver).doSearch(searchQuery);
     }
 
@@ -19,14 +19,14 @@ public class Search extends StartDriver{
         new SearchResult(driver).filterBuyNow();
     }
 
-    @Then("Found element (\\d+) contains \"([^\"]*)\"")
-    public void foundElementContains(String foundItemNumber, String text){
-        Assert.assertTrue("Item number '" + foundItemNumber + "' is not related to text '" + text + "'.", new SearchResult(driver).foundItemRelatesToSearchQuery(foundItemNumber, text));
+    @Then("Found (?:element|item) \"(\\d+)\" contains \"([^\"]*)\"")
+    public void foundElementContains(int foundItemNumber, String text) {
+        Assert.assertTrue("Item number '" + foundItemNumber + "' is not related to text '" + text + "'.", new SearchResult(driver).isFoundItemRelatesToSearchQuery(foundItemNumber, text));
     }
 
     //    @Then("^(?:Found(?:elements|items)|Search results) don't contain \"([^\"]*)\"$") // а можно как-нибудь так?
     @Then("^Found (?:elements|items) don't contain \"([^\"]*)\"$")
     public void foundElementContains(String text) {
-        Assert.assertFalse("Filtered by 'Buy It Now' search results contain auction items", new SearchResult(driver).findElementsWithText(text));
+        Assert.assertFalse("Filtered by 'Buy It Now' search results contain auction items", new SearchResult(driver).isElementsWithTextFound(text));
     }
 }

@@ -4,9 +4,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-/**
- * Created by Maksim_Karnitski on 04.09.2016.
- */
 public class ProductItem extends cuc.pages.AbstractPage {
 
     @FindBy(xpath = ".//*[@id='itemTitle']")
@@ -16,16 +13,16 @@ public class ProductItem extends cuc.pages.AbstractPage {
     private WebElement addToCart;
 
 
-    public ProductItem(WebDriver driver){
+    public ProductItem(WebDriver driver) {
         super(driver);
     }
 
 
-    public String getItemTitleText (){
+    public String getItemTitleText() {
         return itemTitle.getText();
     }
 
-    public void addItemToCart (){
+    public void addItemToCart() {
         addToCart.click();
     }
 

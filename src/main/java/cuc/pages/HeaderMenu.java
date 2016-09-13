@@ -1,5 +1,6 @@
 package cuc.pages;
 
+import cuc.settings.DriverSettings;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -46,11 +47,11 @@ public class HeaderMenu extends AbstractPage {
     }
 
     public boolean isLanguageEng(){
-        return driver.findElements(By.xpath(myEbayEngXpath)).size() > 0;
+        return DriverSettings.isElementPresentByXpath(myEbayEngXpath);
     }
 
     public boolean isLanguageRus(){
-        return driver.findElements(By.xpath(myEbayRusXpath)).size() > 0;
+        return DriverSettings.isElementPresentByXpath(myEbayRusXpath);
     }
 
     public WebElement getElementSearchBtn(){

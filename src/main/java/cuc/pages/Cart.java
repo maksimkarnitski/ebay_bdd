@@ -1,23 +1,25 @@
 package cuc.pages;
 
+import cuc.settings.DriverSettings;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class Cart extends AbstractPage{
+public class Cart extends AbstractPage {
 
     private String foundElementXpath = ".//*[contains(text(), 'variable')]";
+
+    public DriverSettings driverSettings = new DriverSettings();
 
     public Cart(WebDriver driver) {
         super(driver);
     }
 
-    public boolean findElementByText(String text){
+    public boolean isElementFoundByText(String text) {
         String foundElement = foundElementXpath.replace("variable", text);
-        return driver.findElements(By.xpath(foundElement)).size() > 0;
+        return driverSettings.isElementPresentByXpath(foundElement);
     }
 
-    public String getCurrentUrl(){
-        String ba = driver.getCurrentUrl();
-        return ba;
+    public String getCurrentUrl() {
+        return driver.getCurrentUrl();
     }
 }

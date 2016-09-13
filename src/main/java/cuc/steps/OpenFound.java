@@ -17,7 +17,7 @@ public class OpenFound extends StartDriver{
     }
 
     @When("^I open found item \"(\\d+)\"$")
-    public void iOpenFoundItem(String foundItemNumber) {
+    public void iOpenFoundItem(int foundItemNumber) {
         Variables.itemResultItemText = new SearchResult(driver).getResultItemText(foundItemNumber);
         System.out.println("Item that will be selected has label: '" + Variables.itemResultItemText + "'.");
         new SearchResult(driver).selectResultItem(foundItemNumber);

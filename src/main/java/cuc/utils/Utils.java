@@ -1,23 +1,14 @@
 package cuc.utils;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import java.util.Random;
 
 public class Utils {
-    private WebDriver driver;
 
-    public Utils(WebDriver driver) {
-        this.driver = driver;
-    }
-    public void waiterElementXpath(String elementXpath) {
-        (new WebDriverWait(driver, 15)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(elementXpath)));
-    }
+    private static int min = 0;
+    private static int max = 50;
 
-    public void waiterElement(WebElement element) {
-        (new WebDriverWait(driver, 15)).until(ExpectedConditions.visibilityOf(element));
+    public static int generator(){
+        Random random = new Random();
+        return random.nextInt(max - min + 1) + min;
     }
 }
-
