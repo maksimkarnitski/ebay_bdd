@@ -1,6 +1,5 @@
 package cuc.pages;
 
-import cuc.settings.DriverSettings;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,11 +11,9 @@ public class HeaderMenu extends AbstractPage {
     @FindBy(id = "gh-eb-Geo-a-default")
     private WebElement languageSelector;
 
-    private String myEbayEngXpath = ".//ul[@id='gh-eb']//a[text()='My eBay']";
+    private String languageItemXpathVariable = ".//li[@id='gh-eb-Geo']//span[text()='language']";
 
-    private String myEbayRusXpath = ".//ul[@id='gh-eb']//a[text()='Мой eBay']";
-
-    private String languageItemXpath = ".//li[@id='gh-eb-Geo']//span[text()='language']";
+    private String languageItemXpath = "//span[@class='gh-eb-Geo-txt']";
 
     @FindBy(id = "gh-ac")
     private WebElement searchFld;
@@ -29,7 +26,7 @@ public class HeaderMenu extends AbstractPage {
     }
 
     public void selectLanguageItem(String language){
-        String languageItem = languageItemXpath.replace("language", language);
+        String languageItem = languageItemXpathVariable.replace("language", language);
         driver.findElement(By.xpath(languageItem)).click();
     }
 
@@ -43,15 +40,12 @@ public class HeaderMenu extends AbstractPage {
     }
 
     public void hidePopUp(){
-        new Actions(driver).moveToElement(driver.findElement(By.xpath(myEbayEngXpath))).moveByOffset(200, 0).click().build().perform();
+        driver.findElement(By.xpath(languageItemXpath)).click();
     }
 
-    public boolean isLanguageEng(){
-        return DriverSettings.isElementPresentByXpath(myEbayEngXpath);
-    }
-
-    public boolean isLanguageRus(){
-        return DriverSettings.isElementPresentByXpath(myEbayRusXpath);
+    public boolean isSelectedLanguage(String language){
+        String languageItemText = driver.findElement(By.xpath(languageItemXpath)).getText();
+        return languageItemText.equals(language);
     }
 
     public WebElement getElementSearchBtn(){

@@ -19,36 +19,17 @@ public class ChangeLanguage extends StartDriver {
 
     @When("^I select \"(.*)\"")
     public void iSelectLanguage(String language) {
-        new HeaderMenu(driver).selectLanguageItem(language);
+        HeaderMenu headerMenu = new HeaderMenu(driver);
+        headerMenu.selectLanguageItem(language);
         this.language = language;
         //Step hides pop up after language changes, this needs to be done for running next tests after language changing
-        new HeaderMenu(driver).hidePopUp();
+        headerMenu.hidePopUp();
     }
 
     @Then("^Selected language is applied$")
     public void selectedLanguageApplied() {
         HeaderMenu headerMenu = new HeaderMenu(driver);
-        if (this.language.equals("English")) {
-            Assert.assertTrue("Language is not changed", headerMenu.isLanguageEng());
-        }
-        if (this.language.equals("Русский")) {
-            Assert.assertTrue("Language is not changed", headerMenu.isLanguageRus());
+        Assert.assertTrue("Language is not changed", headerMenu.isSelectedLanguage(this.language));
         }
 
-    }
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        ChangeLanguage that = (ChangeLanguage) o;
-
-        return !(language != null ? !language.equals(that.language) : that.language != null);
-
-    }
-
-    @Override
-    public int hashCode() {
-        return language != null ? language.hashCode() : 0;
-    }
 }
